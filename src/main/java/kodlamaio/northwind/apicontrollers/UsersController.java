@@ -54,7 +54,7 @@ public class UsersController {
     }
 
 
-}//Frontend geliştiricisinin İşlemin ne durumda olduğunu anlaması için önemli olan sayılar.
+}
 
 //200
 //300
