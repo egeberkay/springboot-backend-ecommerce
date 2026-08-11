@@ -1,6 +1,8 @@
 # 🚀 Spring Boot E-Commerce RESTful API (Northwind)
 
-This project is a fully-featured e-commerce (Northwind) backend application developed in accordance with modern software development principles and enterprise standards. The system provides a flexible and secure RESTful API infrastructure capable of communicating with any client (Frontend) such as React.
+🛒 Northwind E-Commerce Backend
+
+A backend e-commerce project developed with Spring Boot, built on the classic Northwind database. It was created for learning and self-improvement purposes.
 
 ## 🏗️ Architectural Structure (N-Tier Architecture)
 
@@ -32,17 +34,37 @@ The project is built with a multi-layered enterprise architecture, keeping Maint
 
 ## ⚙️ Installation and Setup
 
-You can follow the steps below to run the project on your local machine.
+## Getting Started
 
-### 1. Prerequisites
-- **Java (JDK)** must be installed on your computer.
-- **PostgreSQL** database must be installed and running on your local machine.
+Follow these steps to set up the project locally.
 
-### 2. Database Configuration
-Open the `src/main/resources/application.properties` file in the project and enter your local database credentials:
+### Prerequisites
 
-```properties
+List the software, compilers, or tools required before installing:
+- Java Development Kit (JDK 17 or higher)
+- PostgreSQL
+- Apache Maven
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/username/northwind.git](https://github.com/username/northwind.git)
+
+2.   Navigate to the project directory:
+
+ Bash
+cd northwind
+3. Configure the database:
+Open the src/main/resources/application.properties file and enter your local PostgreSQL credentials:
+
+Properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/northwind
 spring.datasource.username=YOUR_DATABASE_USERNAME
 spring.datasource.password=YOUR_DATABASE_PASSWORD
 spring.jpa.hibernate.ddl-auto=update
+
+4. Install dependencies:
+
+Bash
+mvn clean install
