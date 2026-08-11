@@ -55,6 +55,7 @@ List the software, compilers, or tools required before installing:
 
  Bash
 cd northwind
+
 3. Configure the database:
 Open the src/main/resources/application.properties file and enter your local PostgreSQL credentials:
 
