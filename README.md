@@ -21,6 +21,35 @@ The project is built with a multi-layered enterprise architecture, keeping Maint
 - **Data Validation:** Data entering the system is checked with `@Valid` annotations at the Controller stage, preventing invalid data from overwhelming the database.
 - **Dependency Injection (IoC):** Dependencies between classes are managed by Spring's Inversion of Control (IoC) container, providing a highly flexible structure.
 
+
+## 📁 Project Folder Structure (Layered Architecture)
+
+Our project is built on Layered Architecture to increase code maintainability and readability.
+
+```text
+📦 src
+ ┣ 📂 main
+ ┃ ┣ 📂 java
+ ┃ ┃ ┗ 📂 kodlamaio.northwind
+ ┃ ┃   ┣ 📂 apicontrollers     # RESTful API endpoints exposed to the outside world
+ ┃ ┃   ┣ 📂 business           # Layer where business rules are executed (Services & Managers)
+ ┃ ┃   ┃ ┣ 📂 abstracts        # Service interfaces
+ ┃ ┃   ┃ ┗ 📂 concretes        # Business rule implementations
+ ┃ ┃   ┣ 📂 core               # Project-independent, universal core codes
+ ┃ ┃   ┃ ┣ 📂 dataAccess       # Common database operations
+ ┃ ┃   ┃ ┣ 📂 entities         # Common entities (User, Role, etc.)
+ ┃ ┃   ┃ ┣ 📂 security         # Spring Security and encryption configurations
+ ┃ ┃   ┃ ┗ 📂 utilities        # Helper tools (SuccessResult, ErrorResult, etc.)
+ ┃ ┃   ┣ 📂 dataAccess         # Layer communicating with the database (Repository/Dao)
+ ┃ ┃   ┃ ┣ 📂 abstracts
+ ┃ ┃   ┃ ┗ 📂 concretes
+ ┃ ┃   ┣ 📂 entities           # Object representations of database tables (ORM)
+ ┃ ┃   ┃ ┣ 📂 abstracts
+ ┃ ┃   ┃ ┣ 📂 concretes        # Concrete entities like Product, Category, etc.
+ ┃ ┃   ┃ ┗ 📂 dtos             # Data Transfer Objects (DTOs)
+ ┃ ┃   ┗ 📜 NorthwindApplication.java  # Spring Boot's main execution class
+ ┃ ┗ 📂 resources              # Configuration files (application.properties, etc.)
+ ┗ 📂 test                     # Unit and integration tests
 ## 🛠️ Technologies and Dependencies Used
 
 - **Java (JDK 11+):** Main programming language
