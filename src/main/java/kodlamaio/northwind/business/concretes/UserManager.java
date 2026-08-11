@@ -1,21 +1,28 @@
 package kodlamaio.northwind.business.concretes;
 
 import kodlamaio.northwind.business.abstracts.UserService;
+import kodlamaio.northwind.core.dataAccess.RoleDao;
+import kodlamaio.northwind.core.entities.Role;
 import kodlamaio.northwind.core.entities.User;
-import kodlamaio.northwind.core.utilities.results.*;
+import kodlamaio.northwind.core.utilities.result.*;
 import kodlamaio.northwind.dataAccess.abstracts.UserDao;
 import kodlamaio.northwind.entities.dtos.UserForLoginDTO;
 import kodlamaio.northwind.entities.dtos.UserForRegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserManager implements UserService {
     private UserDao userDao;
+    private RoleDao roleDao;
+    private PasswordEncoder passwordEncoder;
     @Autowired
-    public UserManager(UserDao userDao) {
+    public UserManager(UserDao userDao, RoleDao roleDao, PasswordEncoder passwordEncoder) {
         super();
         this.userDao = userDao;
+        this.roleDao = roleDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -42,10 +49,17 @@ public class UserManager implements UserService {
         if (userCheck.isSuccess()){
             return new ErrorResult("Bu e-posta adresi sistemde zaten kayitli");
         }
+
         User newUser = new User();
         newUser.setEmail(userForRegisterDTO.getEmail());
-        newUser.setPassword(userForRegisterDTO.getPassword());
 
+        String hashedPassword = passwordEncoder.encode(userForRegisterDTO.getPassword());
+        newUser.setPassword(hashedPassword);
+
+        Role defaultRole = roleDao.findByName("ROLE_USER");
+        if (defaultRole != null){
+            newUser.getRoles().add(defaultRole);
+        }
         return this.add(newUser);
     }
 

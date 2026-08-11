@@ -1,4 +1,4 @@
-package kodlamaio.northwind.core.utilities.results;
+package kodlamaio.northwind.core.utilities.result;
 
 public class Result {
 

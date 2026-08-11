@@ -1,9 +1,9 @@
 package kodlamaio.northwind.business.concretes;
 import java.util.List;
-import kodlamaio.northwind.core.utilities.results.DataResult;
-import kodlamaio.northwind.core.utilities.results.Result;
-import kodlamaio.northwind.core.utilities.results.SuccessDataResult;
-import kodlamaio.northwind.core.utilities.results.SuccessResult;
+import kodlamaio.northwind.core.utilities.result.DataResult;
+import kodlamaio.northwind.core.utilities.result.Result;
+import kodlamaio.northwind.core.utilities.result.SuccessDataResult;
+import kodlamaio.northwind.core.utilities.result.SuccessResult;
 import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,4 +1,4 @@
-package kodlamaio.northwind.core.utilities.results;
+package kodlamaio.northwind.core.utilities.result;
 
 public class ErrorDataResult<T> extends DataResult<T> {
     public ErrorDataResult(T data, String message) {
