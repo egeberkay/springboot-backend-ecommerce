@@ -2,6 +2,10 @@ package kodlamaio.northwind.core.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +17,11 @@ import java.security.PublicKey;
 @Configuration //It tells Spring Boot that this is a configuration file.
 @EnableWebSecurity//activates web security rules
 public class SecurityConfig {
+    private final CustomUserDetailsService customUserDetailsService;
+
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService){
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     @Bean // BCrypt
     public PasswordEncoder passwordEncoder (){
@@ -30,8 +39,19 @@ public class SecurityConfig {
                                 .requestMatchers("/api/products/getall").permitAll()
 
                                 .anyRequest().authenticated()
-
                         );
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(customUserDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager (AuthenticationConfiguration config){
+        return config.getAuthenticationManager();
     }
 }
