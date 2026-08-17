@@ -12,7 +12,7 @@ public class Product {
     @Id//Primery Key alanı olduğunu belirtir
     @GeneratedValue(strategy = GenerationType.IDENTITY)//id nin nasıl oluşacağı
     @Column(name = "product_id")
-    private int id;
+    private Integer id;
 
    // @Column(name = "category_id")
     //private int categoryId;
@@ -21,10 +21,10 @@ public class Product {
     private String productName;
 
     @Column(name = "unit_price")
-    private double unitPrice;
+    private Double unitPrice;
 
     @Column(name = "units_in_stock")
-    private short unitsInStock;
+    private Integer unitsInStock;
 
     @Column(name = "quantity_per_unit")
     private String quantityPerUnit;
@@ -34,8 +34,8 @@ public class Product {
     private Category category;
 
     public Product() {}
-    public Product(short unitsInStock, String quantityPerUnit, double unitPrice,
-                   String productName, int categoryId, int id) {
+    public Product(Integer unitsInStock, String quantityPerUnit, Double unitPrice,
+                   String productName, Integer categoryId, Integer id) {
         super();
         this.unitsInStock = unitsInStock;
         this.quantityPerUnit = quantityPerUnit;
