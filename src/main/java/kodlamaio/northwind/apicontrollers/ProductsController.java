@@ -34,6 +34,10 @@ public class ProductsController {
         return this.productService.add(product);
     }
 
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Result delete(@PathVariable int id){return this.productService.delete(id); }
+
     @GetMapping("/getByProductName")
     public DataResult<Product> getByProductName(@RequestParam String productName) {
         return this.productService.getByProductName(productName);

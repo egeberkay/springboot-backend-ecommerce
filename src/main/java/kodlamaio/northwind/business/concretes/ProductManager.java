@@ -1,12 +1,12 @@
 package kodlamaio.northwind.business.concretes;
 import java.util.List;
-import kodlamaio.northwind.core.utilities.result.DataResult;
-import kodlamaio.northwind.core.utilities.result.Result;
-import kodlamaio.northwind.core.utilities.result.SuccessDataResult;
-import kodlamaio.northwind.core.utilities.result.SuccessResult;
+
+import kodlamaio.northwind.core.utilities.result.*;
 import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,6 +27,7 @@ public class ProductManager implements ProductService {
     }
 
     @Override
+    @Cacheable(value = "productList")
     public DataResult<List<Product>> getAll() {
         return new SuccessDataResult<List<Product>>
                 (this.productDao.findAll() , "Data Listelendi");
@@ -46,9 +47,19 @@ public class ProductManager implements ProductService {
     }
 
     @Override
+    @CacheEvict(value = "productList", allEntries = true)
     public Result add(Product product) {
         this.productDao.save(product);
         return new SuccessResult("Ürün Eklendi");
+    }
+    @Override
+    @CacheEvict(value = "productList", allEntries = true)
+    public Result delete(int id) {
+        if (!this.productDao.existsById(id)){
+            return new ErrorResult("Silinmek istenen ürün bulunamadı!");
+        }
+        this.productDao.deleteById(id);
+        return new SuccessResult("Ürün Silindi");
     }
 
     @Override
@@ -97,4 +108,5 @@ public class ProductManager implements ProductService {
         return new SuccessDataResult<List<ProductWithCategoryDto>>
                 (this.productDao.getProductWithCategoryDetails(),"Data Listelendi");
     }
+
 }

@@ -13,6 +13,7 @@ public interface ProductService {
     DataResult<List<Product>> getAllSorted();
 
     Result add(Product product);
+    Result delete(int id);
 
     DataResult<Product> getByProductName(String productName);
     DataResult<Product> getByProductNameAndCategoryId(String productName, int categoryId);
